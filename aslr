@@ -1,0 +1,70 @@
+#!/bin/bash
+
+a=$(cat /proc/sys/kernel/randomize_va_space)
+
+if [[ $# -eq 0 ]]; then
+	if [[ "$a" = "0" ]]; then
+		echo "aslr is off"
+	elif [[ "$a" = "1" ]]; then
+		echo "aslr is on (noheap)"
+	elif [[ "$a" = "2" ]]; then
+		echo "aslr is on"
+	else
+		echo "aslr set to an unknown value: $a"
+	fi
+	exit 0
+fi
+
+if [[ "$1" = "off" || "$1" = "0" ]]; then
+	if [[ "$a" != "0" ]]; then
+		sudo sysctl -w kernel.randomize_va_space=0
+		if [[ $? = 0 ]]; then
+			echo "aslr is now off"
+		else
+			echo "error"
+			exit 1
+		fi
+	else
+		echo "aslr is already off"
+	fi
+elif [[ "$1" = "on" || "$1" = "2" ]]; then
+	if [[ "$a" != "2" ]]; then
+		sudo sysctl -w kernel.randomize_va_space=2
+		if [[ $? = 0 ]]; then
+			echo "aslr is now on"
+		else
+			echo "error"
+			exit 1
+		fi
+	else
+		echo "aslr is already on"
+	fi
+elif [[ "$1" = "noheap" || "$1" = "1" ]]; then
+	if [[ "$a" != "1" ]]; then
+		sudo sysctl -w kernel.randomize_va_space=1
+		if [[ $? = 0 ]]; then
+			echo "aslr is now on (noheap)"
+		else
+			echo "error"
+			exit 1
+		fi
+	else
+		echo "aslr is already on (noheap)"
+	fi
+else 
+	echo "Usage aslr [on|off|noheap|0|1|2]"
+	echo 
+	echo "Turn address space randomization on, off or inspect its current status."
+	echo
+	echo "Without any argument aslr will print the current address space randomization"
+	echo "setting."
+	echo 
+	echo "[off|0]		Turn the process address space randomization off."
+	echo
+	echo "[noheap|1]  	Make the addresses of mmap base, stack and VDSO page randomized."
+    echo "		This, among other things, implies that shared libraries will be"
+    echo "		loaded to random addresses.  Also for PIE-linked binaries, the"
+    echo "		location of code start is randomized."
+    echo
+	echo "[on|2] 	 	Additionally enable heap randomization. (recommended)"
+fi
