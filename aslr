@@ -52,7 +52,7 @@ elif [[ "$1" = "noheap" || "$1" = "1" ]]; then
 		echo "aslr is already on (noheap)"
 	fi
 else 
-	echo "Usage aslr [on|off|noheap|0|1|2]"
+	echo "Usage: aslr [on|off|noheap|0|1|2]"
 	echo 
 	echo "Turn address space randomization on, off or inspect its current status."
 	echo
@@ -62,9 +62,9 @@ else
 	echo "[off|0]		Turn the process address space randomization off."
 	echo
 	echo "[noheap|1]  	Make the addresses of mmap base, stack and VDSO page randomized."
-    echo "		This, among other things, implies that shared libraries will be"
-    echo "		loaded to random addresses.  Also for PIE-linked binaries, the"
-    echo "		location of code start is randomized."
-    echo
+	echo "		This, among other things, implies that shared libraries will be"
+	echo "		loaded to random addresses.  Also for PIE-linked binaries, the"
+	echo "		location of code start is randomized."
+	echo
 	echo "[on|2] 	 	Additionally enable heap randomization. (recommended)"
 fi
