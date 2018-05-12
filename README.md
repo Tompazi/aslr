@@ -10,7 +10,7 @@ cd /usr/bin/ && sudo wget https://raw.githubusercontent.com/Tompazi/aslr/master/
 ## Usage
 
 ```
-Usage aslr [on|off|noheap|0|1|2]
+Usage: aslr [on|off|noheap|0|1|2]
  
 Turn address space randomization on, off or inspect its current status.
 
