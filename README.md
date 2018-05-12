@@ -1,9 +1,11 @@
 # aslr
 
-A simple script to turn [address space randomization](https://en.wikipedia.org/wiki/Address_space_layout_randomization) on, off or inspect its current status.
+A simple script to turn [address space randomization](https://en.wikipedia.org/wiki/Address_space_layout_randomization) on, off or inspect its current status on Linux.
 
 ## Setup
-
+```
+cd /usr/bin/ && sudo wget https://raw.githubusercontent.com/Tompazi/aslr/master/aslr && sudo chmod +x aslr
+```
 
 ## Usage
 
@@ -17,10 +19,10 @@ setting.
  
 [off|0]		Turn the process address space randomization off.
 
-[noheap|1]  Make the addresses of mmap base, stack and VDSO page randomized.
-			This, among other things, implies that shared libraries will be
-			loaded to random addresses.  Also for PIE-linked binaries, the
-			location of code start is randomized.
+[noheap|1]	Make the addresses of mmap base, stack and VDSO page randomized.
+		This, among other things, implies that shared libraries will be
+		loaded to random addresses.  Also for PIE-linked binaries, the
+		location of code start is randomized.
 
 [on|2] 	 	Additionally enable heap randomization. (recommended)
 ```
