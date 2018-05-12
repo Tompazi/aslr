@@ -4,7 +4,7 @@ A simple script to turn [address space randomization](https://en.wikipedia.org/w
 
 ## Setup
 ```
-cd /usr/bin/ && sudo wget https://raw.githubusercontent.com/Tompazi/aslr/master/aslr && sudo chmod +x aslr
+cd /usr/bin/ && sudo wget https://raw.githubusercontent.com/Tompazi/aslr/master/aslr && sudo chmod +x aslr && cd -
 ```
 
 ## Usage
